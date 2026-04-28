@@ -74,7 +74,7 @@ On most nights, Rubin Observatory is running contiuous on-sky observations durin
 %Considering the rate of acquired pre-LSST visits and anticipated selections for the subset of best quality images, the current effective survery speed is lower than the LSST design
 As of late April 2026, Rubin Observatory has not yet operated in a sustained pre-LSST survey mode for the nominal two-week contiguous period as envisioned in \citedsp{RTN-093}, primarily due to the priorization of on-going on-sky engineering activities to further improve the delivered image quality.
 
-Current analyses imply that the as-built Rubin Observatory is not yet meeting its full technical performance potential for summit operations, and that a combination of offline data analysis and feature development for the optics and thermal environment controls, engineering work at the summit facility, and targeted on-sky engineering tests will continue to drive the performance toward meeting the LSST design specifications.
+Current analyses imply that the as-built Rubin Observatory is not yet meeting its full technical performance potential for summit operations, and that a combination of offline data analysis and feature development for the optics and thermal environment controls, engineering work at the summit facility, and targeted on-sky engineering tests will continue to drive the performance toward meeting all the LSST design specifications.
 A detailed discussion of those analyses and plans is beyond the scope of this document.
 %Detailed plans for ongoing performance optimization will be presented elsewhere.
 
@@ -117,7 +117,10 @@ The LSST survey is designed for contiguous observations between -12 deg evening 
 \begin{figure}
 \centering
 \includegraphics[width=0.99\textwidth]{figures/on-sky_utilization_20251026-20260425.pdf}
-\caption{On-sky utilization during the full Early Operations period to date.}
+\caption{On-sky utilization during the full Early Operations period to date.
+Time is referenced relative to 00:00 UTC on each calendar date.
+Shaded regions incidate the intervals between -12 deg and -18 deg solar elevation twilight.
+Each on-sky visit is indicated with a marker that is colored to indicate primary purpose of the activity.}
 \label{fig:on-sky_utilization}
 \end{figure}
 
@@ -142,7 +145,9 @@ For comparison, the 10-year average value of this ratio for the baseline LSST si
 \begin{figure}
 \centering
 \includegraphics[width=0.99\textwidth]{figures/nvisit_acquired_vs_expected_timeseries_20251026-20260425.pdf}
-\caption{Night-by-night ratio of the number of acquired pre-LSST visits relative to the expected number for an ideal full night of continuous observations with the current baseline LSST survey cadence (v5.1) between -12 deg twilights during the full Early Operations period to date.}
+\caption{Night-by-night ratio of the number of acquired pre-LSST visits relative to the expected number for an ideal full night of continuous observations with the current baseline LSST survey cadence (v5.1) between -12 deg twilights during the full Early Operations period to date.
+Selected nights in February through April that were planned to be entirely dedicated to pre-LSST observations are marked in color to indicate their inclusion in statistical analysis of the effective survey speed.
+}
 \label{fig:visit_rate_timeseries}
 \end{figure}
 
@@ -237,7 +242,10 @@ Figure \ref{fig:ellipticity_full} shows the distribution of measured PSF ellipti
 \begin{figure}
 \centering
 \includegraphics[width=0.49\textwidth]{figures/ellipticity_hist_20251026-20260425.pdf}
-\caption{Ellipticity distribution during the full Early Operations period to date.}
+\caption{PSF ellipticity distribution during the full Early Operations period to date.
+The LSST design specification for median ellipticity (0.04) is indicated by the region with green shading.
+The LSST design specification for the 95\% percentile of the ellipticity distribution is indicated by the yellow shading (0.07).
+}
 \label{fig:ellipticity_full}
 \end{figure}
 
@@ -246,7 +254,7 @@ Figure \ref{fig:diq_instrument_hist_full} shows the distribution of estimated in
 \begin{figure}
 \centering
 \includegraphics[width=0.49\textwidth]{figures/diq_instrument_contribution_hist_20251026-20260425.pdf}
-\caption{Instrument contribution to the delivered image quality during the full Early Operations period to date.}
+\caption{Distribution of the estimated instrument contribution to the delivered image quality during the full Early Operations period to date.}
 \label{fig:diq_instrument_hist_full}
 \end{figure}
 
@@ -256,28 +264,36 @@ The figure also shows the night-by-night distribution of measured ellipticity as
 \begin{figure}
 \centering
 \includegraphics[width=0.99\textwidth]{figures/diq_instrument_contribution_timeseries_20251026-20260425.pdf}
-\caption{Estimated instrument contribution to the delivered image quality expressed a night-by-night timeseries of the distributions.}
+\caption{Estimated instrument contribution to the delivered image quality expressed a night-by-night timeseries of the distributions.
+Points with error bars represent distributions of the performance on each night.
+Green shading indicates the target ($<0.45$ arcsec)specified in \citedsp{RTN-093}.
+Orange shading indicated the LSST design specification for the median ellipticity (0.04).
+}
 \label{fig:diq_instrument_timeseries_full}
 \end{figure}
 
 \subsection{Selected Recent Representative Time Period}
 
 This subsection reports on the delivered image quality during a recent period from 14 April 2026 to 25 April 2026 selected as being most representative of the current performance while observing with the baseline LSST survey strategy (v5.1).
-Several updates to the AOS configuration were applied throughout March and April 2026.
+Several updates to the AOS configuration and dome thermal environment control were applied throughout March and April 2026, and thus, this period reflects the performance with those updates in place.
+Additional pre-LSST observations will be needed to confirm the performance trends with the present configuration.
 
 Figures \ref{fig:diq_instrument_hist_subset} and \ref{fig:ellipticity_subset} highlight the distributions of estimated instrument contribution and measured ellipticity, respectively, highlighting more stable performance during the past weeks.
 
 \begin{figure}
 \centering
 \includegraphics[width=0.49\textwidth]{figures/diq_instrument_contribution_hist_20260414-20260425.pdf}
-\caption{Instrument contribution to DIQ distribution during a recent representative time period.}
+\caption{Distribution of the estimated instrument contribution to delivered image quality during a recent representative time period.
+Green shading indicates the target ($<0.45$ arcsec)specified in \citedsp{RTN-093}.}
 \label{fig:diq_instrument_hist_subset}
 \end{figure}
 
 \begin{figure}
 \centering
 \includegraphics[width=0.49\textwidth]{figures/ellipticity_hist_20260414-20260425.pdf}
-\caption{Ellipticity distribution during a recent representative time period.}
+\caption{PSF ellipticity distribution during a recent representative time period.
+The LSST design specification for median ellipticity (0.04) is indicated by the region with green shading.
+The LSST design specification for the 95\% percentile of the ellipticity distribution is indicated by the yellow shading ($0.07$).}
 \label{fig:ellipticity_subset}
 \end{figure}
 
@@ -292,7 +308,10 @@ Figure \ref{fig:moment_score_timeseries_subset} shows that this performance is s
 \centering
 \includegraphics[width=0.49\textwidth]{figures/moment_score_cumulative_20260414-20260425.pdf}
 \includegraphics[width=0.49\textwidth]{figures/moment_score_cumulative_donut_blur_20260414-20260425.pdf}
-\caption{Moment score cumulative distribution during a recent representative time period. \emph{Left:} Distribution for all pre-LSST detector images during this time period. \emph{Right:} Disaggregated by donut blur as a proxy for atmopshere seeing. Optical aberrations are more readily apparent during periods with better atmosphere seeing.}
+\caption{Moment score cumulative distribution during a recent representative time period.
+Shading indicated moment scores corresponding to different quality categories that characterize the level of non-Gaussian power in the PSF shapes, indicating progressively larger contributions of optical aberrations that might be more challenging to model.
+The large majority of images during this time period have low moment scores and are well represented by their second-order moments.
+\emph{Left:} Distribution for all pre-LSST detector images during this time period. \emph{Right:} Disaggregated by donut blur as a proxy for atmopshere seeing. Optical aberrations are more readily apparent during periods with better atmosphere seeing.}
 \label{fig:moment_score_cumulative_subset}
 \end{figure}
 
@@ -324,7 +343,11 @@ The general trend observed from these comparisons with the SV Surveys is one of 
 \begin{figure}
 \centering
 \includegraphics[width=0.99\textwidth]{figures/on-sky_utilization_20250620-20250921.pdf}
-\caption{On-sky utilization during the Science Validation surveys.}
+\caption{On-sky utilization during the Science Validation surveys.
+Time is referenced relative to 00:00 UTC on each calendar date.
+Shaded regions incidate the intervals between -12 deg and -18 deg solar elevation twilight.
+Each on-sky visit is indicated with a marker that is colored to indicate primary purpose of the activity.
+}
 \label{fig:on-sky_utilization_sv_surveys}
 \end{figure}
 
@@ -332,21 +355,24 @@ The general trend observed from these comparisons with the SV Surveys is one of 
 \centering
 \includegraphics[width=0.49\textwidth]{figures/psf_fwhm_hist_20250620-20250921.pdf}
 \includegraphics[width=0.49\textwidth]{figures/psf_fwhm_cumulative_20250620-20250921.pdf}
-\caption{PSF FWHM histogram from SV surveys.}
+\caption{PSF FWHM distribution during the Science Validation surveys.}
 \label{fig:psf_fwhm_hist_sv_surveys}
 \end{figure}
 
 \begin{figure}
 \centering
 \includegraphics[width=0.49\textwidth]{figures/ellipticity_hist_20250620-20250921.pdf}
-\caption{Ellipticity during the SV surveys.}
+\caption{PSF ellipticity distribution during the Science Validation surveys.
+The LSST design specification for median ellipticity (0.04) is indicated by the region with green shading.
+The LSST design specification for the 95\% percentile of the ellipticity distribution is indicated by the yellow shading ($0.07$).}
 \label{fig:ellipticity_sv_surveys}
 \end{figure}
 
 \begin{figure}
 \centering
 \includegraphics[width=0.49\textwidth]{figures/diq_instrument_contribution_hist_20250620-20250921.pdf}
-\caption{Instrument contribution to DIQ hist during SV surveys.}
+\caption{Distribution of the estimated instrument contribution to delivered image quality during the Science Validation surveys.
+Green shading indicates the target ($<0.45$ arcsec)specified in \citedsp{RTN-093}.}
 \label{fig:diq_instrument_hist_sv_surveys}
 \end{figure}
 
