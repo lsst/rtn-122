@@ -90,7 +90,7 @@ A detailed discussion of those analyses and plans is beyond the scope of this do
 \hline
 Median Instrument contribution to PSF FWHM (arcsec) & 0.45 & 0.42 -- 0.47 \\
 Median Ellipticity & 0.04 & 0.06 \\
-Fraction of images w/ acceptable PSF shapes & - & 0.89 -- 0.96 \\
+Fraction of images w/ acceptable PSF shapes & - & $\sim$0.95 \\
 Median visit acquisition rate relative to ideal night & 0.7 & 0.82 \\
 \hline
 \end{tabular}
@@ -308,7 +308,7 @@ Figure \ref{fig:moment_score_timeseries_subset} shows that this performance is s
 \centering
 \includegraphics[width=0.49\textwidth]{figures/moment_score_cumulative_20260414-20260425.pdf}
 \includegraphics[width=0.49\textwidth]{figures/moment_score_cumulative_donut_blur_20260414-20260425.pdf}
-\caption{Moment score cumulative distribution during a recent representative time period.
+\caption{Moment score complementary cumulative distribution during a recent representative time period.
 Shading indicated moment scores corresponding to different quality categories that characterize the level of non-Gaussian power in the PSF shapes, indicating progressively larger contributions of optical aberrations that might be more challenging to model.
 The large majority of images during this time period have low moment scores and are well represented by their second-order moments.
 \emph{Left:} Distribution for all pre-LSST detector images during this time period. \emph{Right:} Disaggregated by donut blur as a proxy for atmopshere seeing. Optical aberrations are more readily apparent during periods with better atmosphere seeing.}
@@ -318,16 +318,23 @@ The large majority of images during this time period have low moment scores and 
 \begin{figure}
 \centering
 \includegraphics[width=0.99\textwidth]{figures/moment_score_timeseries_20260414-20260425.pdf}
-\includegraphics[width=0.99\textwidth]{figures/moment_score_timeseries_donut_blur_20260414-20260425.pdf}
-\caption{Moment score night-by-night timeseries during a recent representative time period showing the fraction of detector images satisfying two quality thresholds.
-\emph{Top:} fraction of acceptable images for the full sample of pre-LSST detector images.
-\emph{Bottom:} fraction of acceptable images when selecting for periods with best atmosphere seeing.}
+%\includegraphics[width=0.99\textwidth]{figures/moment_score_timeseries_donut_blur_20260414-20260425.pdf}
+\caption{Distribution of per-detector moment scores shown as a night-by-night timeseries during a recent representative time period.
+Thicker black bars show the 10th, 50th, and 90th percentiles of the per-night distribution, while thinner gray bars show the 99th percentiles of the per-night distribution.
+Categories for excellent, good, marginal, and poor moment score values are indicated by the shaded regions.
+%\emph{Top:} fraction of acceptable images for the full sample of pre-LSST detector images.
+%\emph{Bottom:} fraction of acceptable images when selecting for periods with best atmosphere seeing.
+}
 \label{fig:moment_score_timeseries_subset}
 \end{figure}
 
 In summary, during the second half of April, the delivered image quality appears to be limited primarily by the atmosphere seeing, with high correlations between the delivered image quality and the donut blur throughout the night.
 The delivered PSF has been comparatively stable, with a lower incidence of irregular PSF shapes, and more uniform delivered image quality across the field of view.
+During this period, $\sim$95\% of the detector images have low moment score values indicating that the PSF is well described by second moments.
+Additional images with larger moment score values might be acceptable, depending on the specific science case.
+Moment scores are currently be computed for all images acquired during the Early Operations period.
 The median ellipticity remains higher than the design specification of 0.04.
+The SRD miniumum specification for the median ellipticity is 0.05.
 Further wide-area survey observations will help to confirm reliable performance.
 
 \section{Comparison to Commissioning-era Science Validation Surveys}
