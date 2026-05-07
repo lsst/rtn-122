@@ -59,7 +59,6 @@ Report summarizing the on-sky performance delivered by the Vera C. Rubin Observa
 
 Following the substantial completion of the Construction project in October 2025, the NSF-DOE Vera C. Rubin Observatory entered an \textbf{Early Operations} system optimization period with the primary objective to improve the system performance to a level needed to deliver the 10-year Legacy Survey of Space and Time (LSST) as a sub-arcsecond sky survey.
 While the commissioning-era Science Validation Surveys demonstrated system capability to support the LSST science goals, further optimization was needed to achieve sufficiently reliable performance to support the LSST.
-\citedsp{RTN-093} describes the evaluation criteria being used to inform the start the LSST.
 
 This report provides a summary of the demonstrated on-sky performance achieved during the first 6 months of the Early Operations on-sky campaign from 26 October 2025 to 25 April 2026, with an emphasis on key performance indicators for the \textbf{delivered image quality} and \textbf{effective survey speed} as two of the primary considerations for evaluating technical readiness.
 
@@ -68,7 +67,7 @@ The pre-LSST observations have also supported the Early Science Program \citedsp
 This report describes performance trends for pre-LSST observations over the full Early Operations period to date, as well as selected periods in February-April 2026 that have been identified as most representative of the current performance that could be expected for sustained survey observations using the current baseline LSST survey strategy (v5.1).
 The recent performance reflects multiple improvements in hardware (e.g., dome louvers, primary-tertiary mirror thermal control, mitigations for heat sources on the telescope Top End Assembly), software (e.g., Active Optics System (AOS) configuration, controls for telescope slew and settle, summit compute performance optimization), as well as diagnostic capabilities (e.g., guider sensors, in-dome thermal environment sensors, robust characterization of irregular PSF shapes).
 
-Table \ref{tab:metrics} provides a summary of the demonstrated performance for the representative subset of recent pre-LSST observations relative to the criteria established in \citedsp{RTN-093}.
+Table \ref{tab:metrics} provides a summary of the demonstrated performance for the representative subset of recent pre-LSST observations relative to the criteria described in \citedsp{RTN-093}.
 As shown in more detail in the following sections, the distribution of demonstrated performance during recent pre-LSST observations substantially overlaps with the evaluation criteria, indicating that \textbf{Rubin Observatory is now routinely delivering science-quality data acceptable for the 10-year LSST.}
 On most nights, Rubin Observatory is running contiuous on-sky observations during nearly the full night (solar elevation below -12 deg).
 %Considering the rate of acquired pre-LSST visits and anticipated selections for the subset of best quality images, the current effective survery speed is lower than the LSST design
@@ -80,7 +79,7 @@ A detailed discussion of those analyses and plans is beyond the scope of this do
 
 \begin{table}
 \centering
-\caption{Summary of demonstrated performance for a set of key performance indicators relative to the criteria established to inform the start of LSST \citedsp{RTN-093}}
+\caption{Summary of demonstrated performance for a set of key performance indicators relative to criteria described in \citedsp{RTN-093}.}
 \label{tab:metrics}
 
 %\begin{tabular}{p{8.5cm} r p{5.5cm}}
@@ -126,7 +125,7 @@ Each on-sky visit is indicated with a marker that is colored to indicate primary
 
 The Early Operations on-sky campaign to date can be roughly partitioned into four distinct time periods.
 \begin{enumerate}
-  \item From late October 2026 to late December 2025, the team conducted a series of dedicated on-sky engineering tests to characterize the AOS performance, identify major areas of improvement, and refine the open-loop look-up tables (LUT). This period had limited duty cycle for pre-LSST observations, typically 1-2 hours per night. The reduction in on-sky observations in late December and early Jnuary is primarily attributed to seasonal high humidity and the need to avoid moisture condensation on the telescope. Thermal insulation was installed around coolant utility lines on the telescope by mid-January to enlarge the dew point temperature range for nighttime operations.
+  \item From late October 2026 to late December 2025, the team conducted a series of dedicated on-sky engineering tests to characterize the AOS performance, identify major areas of improvement, and refine the open-loop look-up tables (LUT). This period had limited duty cycle for pre-LSST observations, typically 1-2 hours per night. The reduction in on-sky observations in late December and early January is primarily attributed to seasonal high humidity and the need to avoid moisture condensation on the telescope. Thermal insulation was installed around coolant utility lines on the telescope by mid-January to enlarge the dew point temperature range for nighttime operations.
   \item From early January 2026 - early March 2026, the team conducted sustained pre-LSST observations to evaluate the performance during wide-area survey operations. Observations for Rubin First Alerts occured in mid-February 2026. Pauses of on-sky observations in late January through mid-February are attributed to interruptions of utilities for the LSST Camera (LSSTCam) and subsequent recovery, including a vacuum leak repair for the LSSTCam cryostat.
   \item By early March 2026, the team determined that further improvements to the delivered image quality would require an intensive period of on-sky engineering for the AOS, including FBS-driven closed-loop stability tests at fixed telescope pointing as well as observations with the full focal plane pistoned to intra- and extra-focal positions to make detailed measurements of the optical wavefront across the full field of view.
   \item In early April 2026, the team began gradually increasing the duty cycle for pre-LSST observations to evaluate the impact of several hardware and software upgrades.
@@ -155,10 +154,10 @@ During much of the Early Operations period, the rate of acquiring pre-LSST visit
 To provide a clean evaluation of the system capability, we select a subset of nights from mid-Febraury 2026 onwards that were planned to be full nights of pre-LSST observations (marked on Figure \ref{fig:visit_rate_timeseries}).
 This simplified analysis avoids ambiguity around transitions between on-sky engineering and pre-LSST observations, which typically involves some level of inefficiency to make the transition.
 Figure \ref{fig:visit_rate_hist} shows the distribution of visit acquisition rate relative to an ideal night for these selected nights intended for sustained survey observations.
-The measured visit acquisition rate ratios cluster around 0.7 to 0.9, with a median of 0.82, showing that Rubin Observatory is routinely achieving an efficiency of $\sim0.8$ when operated in an LSST survey mode.
+The measured visit acquisition rate ratios cluster around 0.7 to 0.9, with a median of 0.82, showing that Rubin Observatory is routinely achieving an efficiency of $\sim$0.8 when operated in an LSST survey mode.
 This value is most directly comparable to the product of observing efficiency (fO) and system availability (SA) in \citedsp{RTN-093}.
 
-The median gap time between successive visits during pre-LSST observations, generally for 3.5 deg slews between adjascent LSSTCam pointings, is currently $\sim8$ seconds.
+The median gap time between successive visits during pre-LSST observations, generally for 3.5 deg slews between adjacent LSSTCam pointings, is currently $\sim$8 seconds.
 The average filter change time duration meets the design specification of less than 90 seconds.
 Further improvements to the effective survey speed could be achieved through optimization of the timing controls for slew and settle, further reducing the incidence of faults, and balancing of daytime engineering work with earlier start of on-sky observations.
 Survey simulations suggest that increases to the commanded telescope mount assembly motion settings for velocity, acceleration, and jerk would have comparatively minor impact at the few percent level.
@@ -196,8 +195,14 @@ For the analyses in this report, we concentrate on three methods to estimate the
 \begin{enumerate}
   \item Variation of PSF FWHM across the FoV: attribute the difference in PSF FWHM between the 5th and 95th percentiles of sensors to an optical contribution that is added in quadrature
   \item Delivered - Estimated Atmosphere: uses ``donut blur'' as a proxy for the atmosphere contribution, where diffusion of photo-electrons within LSSTCam has been subtracted off from the donut blur in quadrature\footnote{In wavefront estimation from the corner rafts, ``donut blur'' refers the effect of a convolution kernel that is applied to the predicted optical model for out-of-focus images of the telescope pupil in order to match the the observed ``donut'' images.
-Donut blur includes non-static-optics contributions to delivered image quality, including atmosphere, dome seeing, and charge diffusion in LSSTCam sensors. While imperfect, the donut blur currently one of the best proxies for atmosphere, exhibiting a high correlation with short-timescale variations in the delivered image quality.
-Donut blur is correlated with other measures of the atmosphere seeing, including measurements with the Rubin Observatory DIMM, RINGSS at Gemini, and estimates from the guider images on LSSTCam.}
+  Donut blur includes non-static-optics contributions to delivered image quality, including atmosphere, dome seeing, and charge diffusion in LSSTCam sensors.
+  While imperfect, the donut blur currently one of the best proxies for atmosphere, exhibiting a high correlation with short-timescale variations in the delivered image quality.
+  Donut blur is correlated with other measures of the atmosphere seeing, including measurements with the Rubin Observatory DIMM, RINGSS at Gemini, and estimates from the guider images on LSSTCam.
+  The donut blur distribution exhibits some correlation with the angle between the wind direction and dome aperture, indicating a larger dome seeing contribution when pointing away from the wind at typical moderate wind speeds of 3-9 m/s, and larger donut blur is observed when the dome louvers are closed.
+  From late October 2025 through mid-April 2026, 6 dome louvers were operational on most nights.
+  In late April 2026, 6 additional dome louvers were qualified for nighttime operation.
+  The improvement in dome seeing with the additional dome louvers is currently under analysis.
+  }
   \item Optics + Camera Diffusion: estimated contribution of optical aberrations to FWHM determined from corner wavefront sensor measurements + charge diffusion within LSSTCam added in quadrature
 \end{enumerate}
 
@@ -224,7 +229,8 @@ Figure \ref{fig:psf_fwhm_hist_full} shows the distribution of delivered PSF FWHM
 \centering
 \includegraphics[width=0.49\textwidth]{figures/psf_fwhm_hist_20251026-20260425.pdf}
 \includegraphics[width=0.49\textwidth]{figures/psf_fwhm_cumulative_20251026-20260425.pdf}
-\caption{Distribution of PSF FWHM during the full Early Operations time period to date.}
+\caption{Distribution of PSF FWHM during the full Early Operations time period to date.
+The apparent bimodal distribution of the PSF FWHM in u band is potentially a statistical effect, as observations in u amount to fewer than 4\% of the total Early Operations pre-LSST visits, and were clustered during a limited number of nights.}
 \label{fig:psf_fwhm_hist_full}
 \end{figure}
 
@@ -301,7 +307,7 @@ As further measures of the reliability of the delivered image quality, Figure \r
 The analysis shows that the delivered PSFs for the large majority of pre-LSST images are well-described by their second moments, and are minimally affected by optical aberrations.
 Thresholds for excellent, good, marginal, and poor moment score values have been determined by inspection of ensembles of PSF images.
 Consistent results are achived when using shapelet decomposition to fit the PSFs.
-The basic conclusion that most images have acceptable PSF shapes holds when examining the subset of images with best atmosphere seeing (donut blur $<$ 0.8 arcseconds).
+The basic conclusion that most images have acceptable PSF shapes holds when examining the subset of images with best atmosphere + dome seeing (donut blur $<$ 0.8 arcseconds).
 Figure \ref{fig:moment_score_timeseries_subset} shows that this performance is stable across recent nights during the pre-LSST observations.
 
 \begin{figure}
@@ -311,7 +317,7 @@ Figure \ref{fig:moment_score_timeseries_subset} shows that this performance is s
 \caption{Moment score complementary cumulative distribution during a recent representative time period.
 Shading indicated moment scores corresponding to different quality categories that characterize the level of non-Gaussian power in the PSF shapes, indicating progressively larger contributions of optical aberrations that might be more challenging to model.
 The large majority of images during this time period have low moment scores and are well represented by their second-order moments.
-\emph{Left:} Distribution for all pre-LSST detector images during this time period. \emph{Right:} Disaggregated by donut blur as a proxy for atmopshere seeing. Optical aberrations are more readily apparent during periods with better atmosphere seeing.}
+\emph{Left:} Distribution for all pre-LSST detector images during this time period. \emph{Right:} Disaggregated by donut blur as a proxy for atmopshere + dome seeing. Optical aberrations are more readily apparent during periods with better atmosphere + dome seeing.}
 \label{fig:moment_score_cumulative_subset}
 \end{figure}
 
@@ -328,12 +334,12 @@ Categories for excellent, good, marginal, and poor moment score values are indic
 \label{fig:moment_score_timeseries_subset}
 \end{figure}
 
-In summary, during the second half of April, the delivered image quality appears to be limited primarily by the atmosphere seeing, with high correlations between the delivered image quality and the donut blur throughout the night.
+In summary, during the second half of April, the delivered image quality appears to be limited primarily by the atmosphere + dome seeing, with high correlations between the delivered image quality and the donut blur throughout the night.
 The delivered PSF has been comparatively stable, with a lower incidence of irregular PSF shapes, and more uniform delivered image quality across the field of view.
 During this period, $\sim$95\% of the detector images have low moment score values indicating that the PSF is well described by second moments.
 Additional images with larger moment score values might be acceptable, depending on the specific science case.
 Moment scores are currently be computed for all images acquired during the Early Operations period.
-The median ellipticity remains higher than the design specification of 0.04.
+The median ellipticity remains higher than the SRD design specification of 0.04.
 The SRD miniumum specification for the median ellipticity is 0.05.
 Further wide-area survey observations will help to confirm reliable performance.
 
