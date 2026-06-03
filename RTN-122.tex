@@ -78,14 +78,13 @@ On most nights, Rubin Observatory is running contiuous on-sky observations durin
 As of late May 2026, Rubin Observatory has not yet operated in a sustained pre-LSST survey mode for the nominal two-week contiguous period as envisioned in \cite{RTN-093}, primarily due to the priorization of on-going on-sky engineering activities to further improve the delivered image quality.
 
 Current analyses imply that the as-built Rubin Observatory is not yet meeting its full technical performance potential for summit operations, and that a combination of offline data analysis and feature development for the optics and thermal environment controls, engineering work at the summit facility, and targeted on-sky engineering tests will continue to drive the performance toward meeting all the LSST design specifications.
-A detailed discussion of those analyses and plans is beyond the scope of this document.
+\cite{SOTN-004} describes those analyses and improvement plans appears.
 %Detailed plans for ongoing performance optimization will be presented elsewhere.
 
 \begin{table}
 \centering
 \caption{Summary of demonstrated performance for a set of key performance indicators relative to criteria described in \cite{RTN-093}.}
 \label{tab:metrics}
-
 %\begin{tabular}{p{8.5cm} r p{5.5cm}}
 \begin{tabular}{lcc}
 \hline
@@ -97,7 +96,7 @@ A detailed discussion of those analyses and plans is beyond the scope of this do
 %Median visit acquisition rate relative to ideal night & 0.7 & 0.82 \\
 Median Instrument contribution to PSF FWHM (arcsec) & 0.45 & 0.39 -- 0.47 \\
 Median Ellipticity & 0.04 & 0.065 \\
-Fraction of images w/ acceptable PSF shapes & - & $\sim$0.98 \\
+Fraction of images w/ acceptable PSF shapes & - & 0.87 -- 0.98 \\
 Median visit acquisition rate relative to ideal night & 0.7 & 0.82 \\
 \hline
 \end{tabular}
@@ -341,8 +340,10 @@ As further measures of the reliability of the delivered image quality, Figure \r
 The analysis shows that the delivered PSFs for the large majority of pre-LSST images are well-described by their second moments, and are minimally affected by optical aberrations.
 Thresholds for excellent, good, marginal, and poor moment score values have been determined by inspection of ensembles of PSF images.
 Consistent results are achived when using shapelet decomposition to fit the PSFs.
-The basic conclusion that most images have acceptable PSF shapes holds when examining the subset of images with best atmosphere + dome seeing (donut blur $<$0.8 arcseconds).
-Figure \ref{fig:moment_score_timeseries_subset} shows that this performance is stable across recent nights during the pre-LSST observations.
+Further analysis is required to determine appropriate thresholds to use for various science data products, and accordingly, we quote a range between the ``excellent'' and ``good'' thresholds in Table \ref{tab:metrics} to represent this uncertainty.
+The basic conclusion that most images have acceptable PSF shapes holds when examining the subset of images with best atmosphere + dome seeing (donut blur $<$0.8 arcseconds), although this analysis suggests that further refinements to the optics will be needed to maintain good performance as other contributions to the delivered image quality, such as dome seeing, improve over the next year.
+Figure \ref{fig:moment_score_timeseries_subset} shows that this performance is generally stable across recent nights during the pre-LSST observations.
+The outliers with degraded performance are correlated with nights of less stable thermal control of the M1M3 mirror.
 
 \begin{figure}
 \centering
