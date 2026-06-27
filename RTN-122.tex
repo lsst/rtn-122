@@ -1,4 +1,4 @@
-\documentclass[OPS,lsstdraft,authoryear,toc]{lsstdoc}
+\documentclass[OPS,lsst,authoryear,toc]{lsstdoc}
 \input{meta}
 
 % Package imports go here.
@@ -22,7 +22,10 @@
 % Optional subtitle
 % \setDocSubtitle{A subtitle}
 
-\input{authors}
+%\input{authors}
+\author{%
+NSF-DOE Vera C. Rubin Observatory
+}
 
 \setDocRef{RTN-122}
 \setDocUpstreamLocation{\url{https://github.com/lsst/rtn-122}}
@@ -33,7 +36,8 @@
 % \setDocCurator{The Curator of this Document}
 
 \setDocAbstract{%
-Report summarizing the on-sky performance delivered by the Vera C. Rubin Observatory during the Early Operations system optimization period.
+This report summarizes the demonstrated on-sky performance delivered by the Vera C. Rubin Observatory during the Early Operations system optimization period.
+We provide summary statistics and data visualizations for (1) the on-sky utilization and effective survey speed and (2) delivered image quality and estimated instrument contribution to delivered image quality during pre-LSST observations.
 }
 
 % Change history defined here.
@@ -41,7 +45,7 @@ Report summarizing the on-sky performance delivered by the Vera C. Rubin Observa
 % Fields: VERSION, DATE, DESCRIPTION, OWNER NAME.
 % See LPM-51 for version number policy.
 \setDocChangeRecord{%
-  \addtohist{1}{YYYY-MM-DD}{Unreleased.}{Bechtol}
+  \addtohist{1}{2026-06-03}{Initial version.}{Keith Bechtol}
 }
 
 
@@ -54,6 +58,374 @@ Report summarizing the on-sky performance delivered by the Vera C. Rubin Observa
 
 % ADD CONTENT HERE
 % You can also use the \input command to include several content files.
+
+\section{Executive Summary}
+
+Following the substantial completion of the Construction project in October 2025, the NSF-DOE Vera C. Rubin Observatory entered an \textbf{Early Operations} system optimization period with the primary objective to improve the system performance to a level needed to deliver the 10-year Legacy Survey of Space and Time (LSST) as a sub-arcsecond sky survey.
+While the commissioning-era Science Validation Surveys demonstrated system capability to support the LSST science goals, further optimization was needed to achieve sufficiently reliable performance to support the LSST.
+
+This report provides a summary of the demonstrated on-sky performance achieved during the first 6 months of the Early Operations on-sky campaign from 26 October 2025 to 31 May 2026, with an emphasis on key performance indicators for the \textbf{delivered image quality} and \textbf{effective survey speed} as two of the primary considerations for evaluating technical readiness.
+
+On-sky observations during the Early Operations have interleaved dedicated on-sky engineering activies with pre-LSST observations driven by the Feature Based Scheduler (FBS) to routinely monitor the system performance for wide-area survey-mode observations.
+The pre-LSST observations have also supported the Early Science Program \citedsp{RTN-011}, including the start of the public alert stream.
+This report describes performance trends for pre-LSST observations over the full Early Operations period to date, as well as selected periods in February-May 2026 that have been identified as most representative of the current performance that could be expected for sustained survey observations using the current baseline LSST survey strategy (v5.1).
+The recent performance reflects multiple improvements in hardware (e.g., dome louvers, primary-tertiary mirror thermal control, mitigations for heat sources on the telescope Top End Assembly), software (e.g., Active Optics System (AOS) configuration, controls for telescope slew and settle, summit compute performance optimization), as well as diagnostic capabilities (e.g., guider sensors, in-dome thermal environment sensors, robust characterization of irregular PSF shapes).
+
+Table \ref{tab:metrics} provides a summary of the demonstrated performance for the representative subset of recent pre-LSST observations relative to the criteria described in \cite{RTN-093}.
+As shown in more detail in the following sections, the distribution of demonstrated performance during recent pre-LSST observations substantially overlaps with the evaluation criteria, indicating that \textbf{Rubin Observatory is now routinely delivering science-quality data acceptable for the 10-year LSST.}
+On most nights, Rubin Observatory is running contiuous on-sky observations during nearly the full night (solar elevation below -12 deg).
+%Considering the rate of acquired pre-LSST visits and anticipated selections for the subset of best quality images, the current effective survery speed is lower than the LSST design
+As of late May 2026, Rubin Observatory has not yet operated in a sustained pre-LSST survey mode for the nominal two-week contiguous period as envisioned in \cite{RTN-093}, primarily due to the priorization of on-going on-sky engineering activities to further improve the delivered image quality.
+
+Current analyses imply that the as-built Rubin Observatory is not yet meeting its full technical performance potential for summit operations, and that a combination of offline data analysis and feature development for the optics and thermal environment controls, engineering work at the summit facility, and targeted on-sky engineering tests will continue to drive the performance toward meeting all the LSST design specifications.
+\cite{SOTN-004} describes those analyses and improvement plans appears.
+%Detailed plans for ongoing performance optimization will be presented elsewhere.
+
+\begin{table}
+\centering
+\caption{Summary of demonstrated performance for a set of key performance indicators relative to criteria described in \cite{RTN-093}.}
+\label{tab:metrics}
+%\begin{tabular}{p{8.5cm} r p{5.5cm}}
+\begin{tabular}{lcc}
+\hline
+\textbf{Metric} &  \textbf{RTN-093} & \textbf{Demonstrated} \\
+\hline
+%Median Instrument contribution to PSF FWHM (arcsec) & 0.45 & 0.42 -- 0.47 \\
+%Median Ellipticity & 0.04 & 0.06 \\
+%Fraction of images w/ acceptable PSF shapes & - & $\sim$0.95 \\
+%Median visit acquisition rate relative to ideal night & 0.7 & 0.82 \\
+Median Instrument contribution to PSF FWHM (arcsec) & 0.45 & 0.39 -- 0.47 \\
+Median Ellipticity & 0.04 & 0.065 \\
+Fraction of images w/ acceptable PSF shapes & - & 0.87 -- 0.98 \\
+Median visit acquisition rate relative to ideal night & 0.7 & 0.82 \\
+\hline
+\end{tabular}
+\end{table}
+
+% Median ellipticity 0.0629
+% Median FoV 0.476
+% Median Deliverd - Atmosphere 0.415
+% Median optics + cam 0.417
+
+\section{Analysis Notes}
+
+The summary statistics and visualizations included in this report are generated using standard tools for data quality monitoring for Rubin Observatory.
+All of the analyzed data quality metrics are part of the standard telemetry stream produced by the ``Quick Look'' single-visit processing pipeline (using the LSST Science Pipelines software stack) running at the summit facility and recorded in the Consolidated Database \citedsp{DMTN-227}.\footnote{The Consolidated Database schema is can be browsed at \url{https://sdm-schemas.lsst.io/cdb_lsstcam.html}.}
+The Quick Look processing provides near-realtime feedback to support operational decision making during the night, inform test planning for on-sky engineering activities, and to support statistical analysis of summit performance trends over time (e.g., as presented in this report).
+
+The specific data visualization routines used for this report is available at \url{https://github.com/lsst/sp_notebooks}.
+
+\section{On-sky Utilization and Visit Rate}
+
+Figure \ref{fig:on-sky_utilization} shows the on-sky utilization during the first 6 months of the Early Operations period, including dedicated on-sky engineering activities, FBS-driven pre-LSST observations, and optical focus and alignment observing blocks typically run at the start of night, between tests, and during fault recovery to refine the telescope optical state.
+The LSST survey is designed for contiguous observations between -12 deg evening twilight and -12 deg morning twilight.
+
+\begin{figure}
+\centering
+%\includegraphics[width=0.99\textwidth]{figures/on-sky_utilization_20251026-20260425.pdf}
+\includegraphics[width=0.99\textwidth]{figures/on-sky_utilization_20251026-20260531.pdf}
+\caption{On-sky utilization during the full Early Operations period to date.
+Time is referenced relative to 00:00 UTC on each calendar date.
+Shaded regions incidate the intervals between -12 deg and -18 deg solar elevation twilight.
+Each on-sky visit is indicated with a marker that is colored to indicate primary purpose of the activity.}
+\label{fig:on-sky_utilization}
+\end{figure}
+
+The Early Operations on-sky campaign to date can be roughly partitioned into four distinct time periods.
+\begin{enumerate}
+  \item From late October 2026 to late December 2025, the team conducted a series of dedicated on-sky engineering tests to characterize the AOS performance, identify major areas of improvement, and refine the open-loop look-up tables (LUT). This period had limited duty cycle for pre-LSST observations, typically 1-2 hours per night. The reduction in on-sky observations in late December and early January is primarily attributed to seasonal high humidity and the need to avoid moisture condensation on the telescope. Thermal insulation was installed around coolant utility lines on the telescope by mid-January to enlarge the dew point temperature range for nighttime operations.
+  \item From early January 2026 - early March 2026, the team conducted sustained pre-LSST observations to evaluate the performance during wide-area survey operations. Observations for Rubin First Alerts occured in mid-February 2026. Pauses of on-sky observations in late January through mid-February are attributed to interruptions of utilities for the LSST Camera (LSSTCam) and subsequent recovery, including a vacuum leak repair for the LSSTCam cryostat.
+  \item By early March 2026, the team determined that further improvements to the delivered image quality would require an intensive period of on-sky engineering for the AOS, including FBS-driven closed-loop stability tests at fixed telescope pointing as well as observations with the full focal plane pistoned to intra- and extra-focal positions to make detailed measurements of the optical wavefront across the full field of view.
+  \item In early April 2026, the team began gradually increasing the duty cycle for pre-LSST observations to evaluate the impact of several hardware and software upgrades.
+\end{enumerate}
+
+By mid-December 2025, Rubin Observatory had demonstrated sufficient reliability of summit electrical power utilities and dome control systems, including the dome aperture shutter, to extend routine open-dome nighttime observations to morning -12 deg twilight.
+In mid-January 2026, the team began using an earlier start and developed a more efficient initial optical focus and alignment procedure, allowing pre-LSST observations to begin closer to the evening -12 deg twilight.
+A general trend throughout the Early Operations period is toward longer contiguous periods of on-sky observing during the night and more efficient recovery from faults.
+
+A more detailed week-by-week narrative of major activities during the on-sky campaign is available on LSST Community forum \url{https://community.lsst.org/tag/early-ops-update}.
+
+Figure \ref{fig:visit_rate_timeseries} shows the timeseries for the rate of acquiring pre-LSST visits relative to an ideal full night through the full Early Operations period.
+The vertical axis is the ratio of the number of pre-LSST visits relative to the expected number of visits for continous observations with the current baseline LSST survey cadence (v5.1) between -12 deg twilights.
+For comparison, the 10-year average value of this ratio for the baseline LSST simulation is 0.63, considering expected losses for weather, engineering, and downtime in the simulation.\footnote{On individual nights with good conditions, Rubin Observatory should aim to get as close to a ratio of 1.0 as possible to demonstrate system capability. Averaged over long periods of time, Rubin Observatory would need to achieve an average ratio of ~0.63 or better to match the LSST design. In order to reach that long-term average, Rubin Observatory would need to consistently do better than 0.63 on most nights when there are not substantial weather, engineering, or downtime losses.}
+Note that the calculated number of visits for an ideal night uses a default 30-second exposure time for a Standard Visit, whereas the actual exposure time for u-band visits is 38 seconds, and thus the number of actual visits relative to the ideal night is lower on nights with many u-band visits when using this metric.
+
+\begin{figure}
+\centering
+%\includegraphics[width=0.99\textwidth]{figures/nvisit_acquired_vs_expected_timeseries_20251026-20260425.pdf}
+\includegraphics[width=0.99\textwidth]{figures/nvisit_acquired_vs_expected_timeseries_20251026-20260531.pdf}
+\caption{Night-by-night ratio of the number of acquired pre-LSST visits relative to the expected number for an ideal full night of continuous observations with the current baseline LSST survey cadence (v5.1) between -12 deg twilights during the full Early Operations period to date.
+Selected nights in February through April that were planned to be entirely dedicated to pre-LSST observations are marked in color to indicate their inclusion in statistical analysis of the effective survey speed.
+}
+\label{fig:visit_rate_timeseries}
+\end{figure}
+
+During much of the Early Operations period, the rate of acquiring pre-LSST visits relative to ideal was typically much less than unity due to prioritization of on-sky engineering activities (see Figure \ref{fig:on-sky_utilization}).
+To provide a clean evaluation of the system capability, we select a subset of nights from mid-Febraury 2026 onwards that were planned to be full nights of pre-LSST observations (marked on Figure \ref{fig:visit_rate_timeseries}).
+This simplified analysis avoids ambiguity around transitions between on-sky engineering and pre-LSST observations, which typically involves some level of inefficiency to make the transition.
+Figure \ref{fig:visit_rate_hist} shows the distribution of visit acquisition rate relative to an ideal night for these selected nights intended for sustained survey observations.
+The measured visit acquisition rate ratios cluster around 0.7 to 0.9, with a median of 0.82, showing that Rubin Observatory is routinely achieving an efficiency of $\sim$0.8 when operated in an LSST survey mode.
+This value is most directly comparable to the product of observing efficiency (fO) and system availability (SA) in \cite{RTN-093}.
+
+The median gap time between successive visits during pre-LSST observations, generally for 3.5 deg slews between adjacent LSSTCam pointings, the demonstrated performance is $\sim$8 seconds.
+As shown in Figure \ref{fig:gap_time_timeseries}, the median visit gap time has varied throughout the Early Operations period as the team has worked on the controls and interaction between components of the observatory.
+In late April 2026, the median visit gap time has increased to $\sim$12 seconds due to a condition where the AOS closed-loop correction becomes available just before the start of the next exposure and the system delays the start of the exposure to apply the AOS correction and thus improve the expected image quality.
+The current delay arose due to improvements in the speed of computing AOS closed-loop corrections, and is expected to disappear when the AOS wavefront estimation time further improves to less than a single visit exposure time.
+The average filter change time duration meets the design specification of less than 90 seconds.
+
+Further improvements to the effective survey speed could be achieved through optimization of the timing controls for slew and settle, further reducing the incidence of faults, and balancing of daytime engineering work with earlier start of on-sky observations.
+Survey simulations suggest that increases to the commanded telescope mount assembly motion settings for velocity, acceleration, and jerk would have comparatively minor impact at the few percent level.
+
+\begin{figure}
+\centering
+\includegraphics[width=0.99\textwidth]{figures/gap_time_timeseries_20251026-20260531.pdf}
+\caption{Night-by-night distribution of the distribution (25th, 50th, and 75th percentiles) of gap times between successive visits in pre-LSST observations during the full Early Operations period to date.
+The increase in visit gap times starting in mid-April is due to a known effect related to interactions with the AOS that is expected to be addressed in the next months.
+The design requirement for the median gap time between successive visits of 5 seconds is shown by the green dashed line and shaded region.
+}
+\label{fig:gap_time_timeseries}
+\end{figure}
+
+The expected average system availability over time periods of months to years is more challenging to evaluate given the limited time baseline to date and on-going engineering work.
+
+\begin{figure}
+\centering
+%\includegraphics[width=0.49\textwidth]{figures/nvisit_acquired_vs_expected_hist_20251026-20260425.pdf}
+\includegraphics[width=0.49\textwidth]{figures/nvisit_acquired_vs_expected_hist_20251026-20260531.pdf}
+\caption{Distribution of the ratio of the number of acquired pre-LSST visits relative to the expected number for an ideal full night of continuous observations with the current baseline LSST survey cadence (v5.1) between -12 deg twilights.
+This visualization shows results for a subset of nights since mid-Febraury 2026 that were planned to be full nights of pre-LSST observations.}
+\label{fig:visit_rate_hist}
+\end{figure}
+
+\section{Delivered Image Quality}
+
+The primary measures of the delivered image quality are the PSF FWHM and ellipticity as computed from second moments.
+
+Irregular PSF shapes can be identified and characterized by their non-Gaussian power as determined from higher order moments and/or shapelet decomposition.
+In the analyses that follow, we compute a ``moment score'' derived from third- and fourth-order moments appearing as trefoil and coma optical aberrations.
+
+The delivered image quality includes contributions from
+\begin{itemize}
+  \item static optics, principally the optical figure (e.g., as-built optics, AOS, primary-tertiary (M1M3) mirror thermal gradients)
+  \item dynamic optics (e.g., vibrations of the top end assembly)
+  \item mount motion (e.g., tracking drift)
+  \item atmosphere seeing (multiple layers),
+  \item dome seeing,
+  \item and the LSSTCam detectors (e.g., diffusion of photo-electrons within the detectors).
+\end{itemize}
+
+Rubin Observatory has developed an extensive set of tools and analysis methods to disentangle the various system contributions to the delivered image quality.
+For the analyses in this report, we concentrate on three methods to estimate the instrument contribution to the delivered image quality.
+
+\begin{enumerate}
+  \item Variation of PSF FWHM across the FoV: attribute the difference in PSF FWHM between the 5th and 95th percentiles of sensors to an optical contribution that is added in quadrature
+  \item Delivered - Estimated Atmosphere: uses ``donut blur'' as a proxy for the atmosphere contribution, where diffusion of photo-electrons within LSSTCam has been subtracted off from the donut blur in quadrature\footnote{In wavefront estimation from the corner rafts, ``donut blur'' refers the effect of a convolution kernel that is applied to the predicted optical model for out-of-focus images of the telescope pupil in order to match the the observed ``donut'' images.
+  Donut blur includes non-static-optics contributions to delivered image quality, including atmosphere, dome seeing, and charge diffusion in LSSTCam sensors.
+  While imperfect, the donut blur currently one of the best proxies for atmosphere, exhibiting a high correlation with short-timescale variations in the delivered image quality.
+  Donut blur is correlated with other measures of the atmosphere seeing, including measurements with the Rubin Observatory DIMM, RINGSS at Gemini, and estimates from the guider images on LSSTCam.
+  The donut blur distribution exhibits some correlation with the angle between the wind direction and dome aperture, indicating a larger dome seeing contribution when pointing away from the wind at typical moderate wind speeds of 3-9 m/s, and larger donut blur is observed when the dome louvers are closed.
+  From late October 2025 through mid-April 2026, 6 dome louvers were operational on most nights.
+  In late April 2026, 6 additional dome louvers were qualified for nighttime operation.
+  The improvement in dome seeing with the additional dome louvers is currently under analysis.
+  }
+  \item Optics + Camera Diffusion: estimated contribution of optical aberrations to FWHM determined from corner wavefront sensor measurements + charge diffusion within LSSTCam added in quadrature
+\end{enumerate}
+
+While each of these three approaches has limitations to fully characterize the total system contribution to the delivered image quality, the ensemble of methods is thought to be a reasonable approximation.
+In practice, we find that metric values from the three approaches are correlated within individual nights and in longer-term trends across nights.
+
+%sqrt(fwhm_95^2 - fwhm_5^2)
+%Attribute the difference in PSF FWHM between the 5th and 95th percentiles of sensors to an optical contribution that is added in quadrature
+%AOS optics contribution estimate + camera diffusion:
+%sqrt(aos_fwhm^2 + cam_fwhm^2)
+%Estimated optics contribution to FWHM from corner wavefront sensors + camera diffusion added in quadrature
+%Delivered image quality w/ donut_blur as proxy for atmosphere:
+%sqrt(fwhm_50^2 - (donut_blur^2 - cam_fwhm^2))
+%Uses donut_blur as a proxy for the atmosphere contribution, where the camera	diffusion has been subtracted off from the donut_blur in quadrature
+
+All of the distributions in this section come from pre-LSST observations.
+During the Early Operations period, some of these survey observations were acquired using modified FBS configurations to examine the impact of additional constraints (e.g., limited telescope elevation range and/or limited LSSTCam rotator angle range) or inserting AOS closed-loop iterations after a filter change to account for uncertainty in the filter-dependent focus offsets.
+
+\subsection{Delivered Image Quality: Full Early Operations Period}
+
+Figure \ref{fig:psf_fwhm_hist_full} shows the distribution of delivered PSF FWHM across the full Early Operations period to date, both as a probability distribution function and cumulative distribution function.
+
+\begin{figure}
+\centering
+%\includegraphics[width=0.49\textwidth]{figures/psf_fwhm_hist_20251026-20260425.pdf}
+%\includegraphics[width=0.49\textwidth]{figures/psf_fwhm_cumulative_20251026-20260425.pdf}
+\includegraphics[width=0.49\textwidth]{figures/psf_fwhm_hist_20251026-20260531.pdf}
+\includegraphics[width=0.49\textwidth]{figures/psf_fwhm_cumulative_20251026-20260531.pdf}
+\caption{Distribution of PSF FWHM during the full Early Operations time period to date.
+The apparent bimodal distribution of the PSF FWHM in u band is potentially a statistical effect, as observations in u amount to fewer than 4\% of the total Early Operations pre-LSST visits, and were clustered during a limited number of nights.}
+\label{fig:psf_fwhm_hist_full}
+\end{figure}
+
+Figure \ref{fig:psf_fwhm_timeseries_full} shows the night-by-night timeseries for the measured distribution of delivered image quality during the Early Operations period.
+
+\begin{figure}
+\centering
+%\includegraphics[width=0.99\textwidth]{figures/diq_measured_timeseries_20251026-20260425.pdf}
+\includegraphics[width=0.99\textwidth]{figures/diq_measured_timeseries_20251026-20260531.pdf}
+\caption{Night-by-night distributions of the measured PSF FWHM during the full Early Operations period.}
+\label{fig:psf_fwhm_timeseries_full}
+\end{figure}
+
+Figure \ref{fig:ellipticity_full} shows the distribution of measured PSF ellipticity during the Early Operations period.
+
+\begin{figure}
+\centering
+%\includegraphics[width=0.49\textwidth]{figures/ellipticity_hist_20251026-20260425.pdf}
+\includegraphics[width=0.49\textwidth]{figures/ellipticity_hist_20251026-20260531.pdf}
+\caption{PSF ellipticity distribution during the full Early Operations period to date.
+The LSST design specification for median ellipticity (0.04) is indicated by the region with green shading.
+The LSST design specification for the 95\% percentile of the ellipticity distribution is indicated by the yellow shading (0.07).
+}
+\label{fig:ellipticity_full}
+\end{figure}
+
+Figure \ref{fig:diq_instrument_hist_full} shows the distribution of estimated instrument contribution to the delivered image quality using three methods.
+
+\begin{figure}
+\centering
+%\includegraphics[width=0.49\textwidth]{figures/diq_instrument_contribution_hist_20251026-20260425.pdf}
+\includegraphics[width=0.49\textwidth]{figures/diq_instrument_contribution_hist_20251026-20260531.pdf}
+\caption{Distribution of the estimated instrument contribution to the delivered image quality during the full Early Operations period to date.}
+\label{fig:diq_instrument_hist_full}
+\end{figure}
+
+Figure \ref{fig:diq_instrument_timeseries_full} shows the night-by-night distribution of estimated instrument contribution to the delivered image quality during the Early Operations period.
+The figure also shows the night-by-night distribution of measured ellipticity as a further indicator for the quality of the PSF shapes.
+
+\begin{figure}
+\centering
+%\includegraphics[width=0.99\textwidth]{figures/diq_instrument_contribution_timeseries_20251026-20260425.pdf}
+\includegraphics[width=0.99\textwidth]{figures/diq_instrument_contribution_timeseries_20251026-20260531.pdf}
+\caption{Estimated instrument contribution to the delivered image quality expressed a night-by-night timeseries of the distributions.
+Points with error bars represent distributions of the performance on each night.
+Green shading indicates the target ($<$0.45 arcsec) specified in \cite{RTN-093}.
+Orange shading indicated the LSST design specification for the median ellipticity (0.04).
+}
+\label{fig:diq_instrument_timeseries_full}
+\end{figure}
+
+\subsection{Delivered Image Quality: April-May 2026}
+
+This subsection reports on the delivered image quality during the recent period from 19 May 2026 to 31 May 2026 selected as being most representative of the current performance while observing with the baseline LSST survey strategy (v5.1).\footnote{Image quality diagnostics from the nights of 28-30 April 2026 are not included in this version of the report due a database issue that is currently being addressed. The performance on these nights was comparable to other nights from 19 May 2026 to 31 May 2026.}
+Several updates to the AOS configuration and dome thermal environment control were applied throughout March and April 2026, and thus, this period reflects the performance with those updates in place.
+%Additional pre-LSST observations will be needed to confirm the performance trends with the present configuration.
+
+Figures \ref{fig:diq_instrument_hist_subset} and \ref{fig:ellipticity_subset} highlight the distributions of estimated instrument contribution and measured ellipticity, respectively, highlighting more stable performance during the past weeks.
+
+\begin{figure}
+\centering
+%\includegraphics[width=0.49\textwidth]{figures/diq_instrument_contribution_hist_20260414-20260425.pdf}
+\includegraphics[width=0.49\textwidth]{figures/diq_instrument_contribution_hist_20260419-20260531.pdf}
+\caption{Distribution of the estimated instrument contribution to delivered image quality during a recent representative time period.
+Green shading indicates the target ($<$0.45 arcsec)specified in \cite{RTN-093}.}
+\label{fig:diq_instrument_hist_subset}
+\end{figure}
+
+\begin{figure}
+\centering
+%\includegraphics[width=0.49\textwidth]{figures/ellipticity_hist_20260414-20260425.pdf}
+\includegraphics[width=0.49\textwidth]{figures/ellipticity_hist_20260419-20260531.pdf}
+\caption{PSF ellipticity distribution during a recent representative time period.
+The LSST design specification for median ellipticity (0.04) is indicated by the region with green shading.
+The LSST design specification for the 95\% percentile of the ellipticity distribution is indicated by the yellow shading ($0.07$).}
+\label{fig:ellipticity_subset}
+\end{figure}
+
+As further measures of the reliability of the delivered image quality, Figure \ref{fig:moment_score_cumulative_subset} shows the distribution of ``moment scores'' that quantify the non-Gaussian power in the PSF shapes as estimated from third- and fourth-order moments.
+The analysis shows that the delivered PSFs for the large majority of pre-LSST images are well-described by their second moments, and are minimally affected by optical aberrations.
+Thresholds for excellent, good, marginal, and poor moment score values have been determined by inspection of ensembles of PSF images.
+Consistent results are achived when using shapelet decomposition to fit the PSFs.
+Further analysis is required to determine appropriate thresholds to use for various science data products, and accordingly, we quote a range between the ``excellent'' and ``good'' thresholds in Table \ref{tab:metrics} to represent this uncertainty.
+The basic conclusion that most images have acceptable PSF shapes holds when examining the subset of images with best atmosphere + dome seeing (donut blur $<$0.8 arcseconds), although this analysis suggests that further refinements to the optics will be needed to maintain good performance as other contributions to the delivered image quality, such as dome seeing, improve over the next year.
+Figure \ref{fig:moment_score_timeseries_subset} shows that this performance is generally stable across recent nights during the pre-LSST observations.
+The outliers with degraded performance are correlated with nights of less stable thermal control of the M1M3 mirror.
+
+\begin{figure}
+\centering
+%\includegraphics[width=0.49\textwidth]{figures/moment_score_cumulative_20260414-20260425.pdf}
+%\includegraphics[width=0.49\textwidth]{figures/moment_score_cumulative_donut_blur_20260414-20260425.pdf}
+\includegraphics[width=0.49\textwidth]{figures/moment_score_cumulative_20260419-20260531.pdf}
+\includegraphics[width=0.49\textwidth]{figures/moment_score_cumulative_donut_blur_20260419-20260531.pdf}
+\caption{Moment score complementary cumulative distribution during a recent representative time period.
+Shading indicated moment scores corresponding to different quality categories that characterize the level of non-Gaussian power in the PSF shapes, indicating progressively larger contributions of optical aberrations that might be more challenging to model.
+The large majority of images during this time period have low moment scores and are well represented by their second-order moments.
+\emph{Left:} Distribution for all pre-LSST detector images during this time period. \emph{Right:} Disaggregated by donut blur as a proxy for atmopshere + dome seeing. Optical aberrations are more readily apparent during periods with better atmosphere + dome seeing.}
+\label{fig:moment_score_cumulative_subset}
+\end{figure}
+
+\begin{figure}
+\centering
+%\includegraphics[width=0.99\textwidth]{figures/moment_score_timeseries_20260414-20260425.pdf}
+\includegraphics[width=0.99\textwidth]{figures/moment_score_timeseries_20260419-20260531.pdf}
+%\includegraphics[width=0.99\textwidth]{figures/moment_score_timeseries_donut_blur_20260414-20260425.pdf}
+\caption{Distribution of per-detector moment scores shown as a night-by-night timeseries during a recent representative time period.
+Thicker black bars show the 10th, 50th, and 90th percentiles of the per-night distribution, while thinner gray bars show the 99th percentiles of the per-night distribution.
+Categories for excellent, good, marginal, and poor moment score values are indicated by the shaded regions.
+%\emph{Top:} fraction of acceptable images for the full sample of pre-LSST detector images.
+%\emph{Bottom:} fraction of acceptable images when selecting for periods with best atmosphere seeing.
+}
+\label{fig:moment_score_timeseries_subset}
+\end{figure}
+
+In summary, from mid-April through May 2026, the delivered image quality appears to be limited primarily by the atmosphere + dome seeing, with high correlations between the delivered image quality and the donut blur throughout the night.
+The delivered PSF has been comparatively stable, with a lower incidence of irregular PSF shapes, and more uniform delivered image quality across the field of view.
+During this period, $\sim$95\% of the detector images have low moment score values indicating that the PSF is well described by second moments.
+Additional images with larger moment score values might be acceptable, depending on the specific science case.
+Moment scores are currently be computed for all images acquired during the Early Operations period.
+The median ellipticity remains higher than the SRD design specification of 0.04.
+The SRD miniumum specification for the median ellipticity is 0.05.
+Further wide-area survey observations will help to confirm reliable performance.
+
+\section{Comparison to Commissioning-era Science Validation Surveys}
+
+Figure \ref{fig:on-sky_utilization_sv_surveys} shows on-sky utilization during the commissioning-era SV surveys.
+
+Figure \ref{fig:psf_fwhm_hist_sv_surveys} and Figure \ref{fig:ellipticity_sv_surveys} show the distributions of PSF FWHM and ellipticity, respectively.
+
+Figure \ref{fig:diq_instrument_hist_sv_surveys} shows the distribution of estimated instrument contribution to the delivered image quality.
+
+The general trend observed from these comparisons with the SV Surveys is one of increased on-sky utilization and more reliable delivered image quality during the Early Operations period.
+
+\begin{figure}
+\centering
+\includegraphics[width=0.99\textwidth]{figures/on-sky_utilization_20250620-20250921.pdf}
+\caption{On-sky utilization during the Science Validation surveys.
+Time is referenced relative to 00:00 UTC on each calendar date.
+Shaded regions incidate the intervals between -12 deg and -18 deg solar elevation twilight.
+Each on-sky visit is indicated with a marker that is colored to indicate primary purpose of the activity.
+}
+\label{fig:on-sky_utilization_sv_surveys}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[width=0.49\textwidth]{figures/psf_fwhm_hist_20250620-20250921.pdf}
+\includegraphics[width=0.49\textwidth]{figures/psf_fwhm_cumulative_20250620-20250921.pdf}
+\caption{PSF FWHM distribution during the Science Validation surveys.}
+\label{fig:psf_fwhm_hist_sv_surveys}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[width=0.49\textwidth]{figures/ellipticity_hist_20250620-20250921.pdf}
+\caption{PSF ellipticity distribution during the Science Validation surveys.
+The LSST design specification for median ellipticity (0.04) is indicated by the region with green shading.
+The LSST design specification for the 95\% percentile of the ellipticity distribution is indicated by the yellow shading ($0.07$).}
+\label{fig:ellipticity_sv_surveys}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[width=0.49\textwidth]{figures/diq_instrument_contribution_hist_20250620-20250921.pdf}
+\caption{Distribution of the estimated instrument contribution to delivered image quality during the Science Validation surveys.
+Green shading indicates the target ($<$0.45 arcsec)specified in \cite{RTN-093}.}
+\label{fig:diq_instrument_hist_sv_surveys}
+\end{figure}
 
 \appendix
 
